@@ -21,8 +21,17 @@ python -m http.server 8765
 ```
 
 Open `http://localhost:8765/` and `http://localhost:8765/zh/`.
-Edit `assets/styles.css` for layout changes. The conceptual inference-stack
-illustration is an inline SVG, not an experimental result.
+Edit `assets/styles.css` for layout changes. The compact academic layout lives
+in `tools/academic_layout.py`. The paper thumbnail is a render of the first page
+of the linked Beyond PDF.
+
+## Design references
+
+The white, cobalt-blue academic profile is independently implemented, with
+layout inspiration from [Minimal Light](https://minimal-light-theme.yliu.me/),
+[Jon Barron](https://jonbarron.info/) and
+[al-folio](https://alshedivat.github.io/al-folio/). It does not copy their personal
+content or photographs. The previous site design is retained in Git history.
 
 Copy the latest approved PDFs from the résumé repository to `assets/resume/`
 when updating the downloads. Preserve the résumé filenames so public links stay

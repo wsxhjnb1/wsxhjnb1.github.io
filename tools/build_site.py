@@ -1,6 +1,5 @@
 """Generate the English and Chinese static pages; no third-party packages."""
 from pathlib import Path
-from html import escape
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://wsxhjnb1.github.io"
@@ -111,103 +110,11 @@ COPY = {
     }
 }
 
-DIAGRAM = '''<svg class="focus-diagram" viewBox="0 0 620 470" role="img" aria-labelledby="diagram-title diagram-desc">
-<title id="diagram-title">Memory, compute and decisions</title>
-<desc id="diagram-desc">A conceptual research map linking compact KV memory, fused GPU decoding, and Agent tool-call scoring. This is not a benchmark chart.</desc>
-<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#668a87" stroke-width="1.2"/></marker></defs>
-<g font-family="Segoe UI,Arial,sans-serif" fill="#264340">
-<rect x="24" y="24" width="572" height="112" rx="12" fill="#e9eeea"/>
-<text x="46" y="54" font-size="13" letter-spacing="2">01 / KV MEMORY</text>
-<text x="46" y="84" font-size="20" font-weight="600">Keep the context. Use fewer bytes.</text>
-<g fill="#14646b"><rect x="46" y="103" width="30" height="12" rx="3"/><rect x="82" y="103" width="30" height="12" rx="3"/><rect x="118" y="103" width="30" height="12" rx="3"/><rect x="154" y="103" width="30" height="12" rx="3"/></g>
-<g fill="#7eaaa3"><rect x="196" y="103" width="30" height="12" rx="3"/><rect x="232" y="103" width="30" height="12" rx="3"/><rect x="268" y="103" width="30" height="12" rx="3"/><rect x="304" y="103" width="30" height="12" rx="3"/></g>
-<text x="390" y="113" font-size="14" fill="#526d68">packed K / V</text>
-<path d="M310 144V167" stroke="#668a87" fill="none" marker-end="url(#arrow)"/>
-<rect x="24" y="178" width="572" height="112" rx="12" fill="#fffdf7" stroke="#d4ddd5"/>
-<text x="46" y="208" font-size="13" letter-spacing="2">02 / GPU DECODING</text>
-<rect x="46" y="227" width="142" height="40" rx="7" fill="#dbe8df"/><text x="117" y="252" text-anchor="middle" font-size="15">dequantize</text>
-<path d="M196 247H220" stroke="#668a87" fill="none" marker-end="url(#arrow)"/>
-<rect x="232" y="227" width="142" height="40" rx="7" fill="#14646b"/><text x="303" y="252" text-anchor="middle" font-size="15" fill="white">attention</text>
-<path d="M382 247H406" stroke="#668a87" fill="none" marker-end="url(#arrow)"/>
-<rect x="418" y="227" width="154" height="40" rx="7" fill="#dbe8df"/><text x="495" y="252" text-anchor="middle" font-size="15">accumulate</text>
-<path d="M310 298V321" stroke="#668a87" fill="none" marker-end="url(#arrow)"/>
-<rect x="24" y="332" width="572" height="112" rx="12" fill="#e9eeea"/>
-<text x="46" y="362" font-size="13" letter-spacing="2">03 / AGENT SCORING</text>
-<text x="46" y="398" font-size="20" font-weight="600">Score candidates. Choose a call.</text>
-<g transform="translate(428 354)"><rect width="144" height="20" rx="4" fill="#c5d7cd"/><rect y="27" width="144" height="20" rx="4" fill="#14646b"/><rect y="54" width="144" height="20" rx="4" fill="#c5d7cd"/><text x="72" y="41" text-anchor="middle" font-size="13" fill="white">selected</text></g>
-</g></svg>'''
-
-
-def link(url, label, css=""):
-    return f'<a href="{escape(url, quote=True)}" class="{css}">{escape(label)}</a>'
-
-
-def timeline(items):
-    return '<div class="timeline">' + ''.join(
-        f'<div class="timeline-item"><span class="timeline-date">{escape(date)}</span><h4>{escape(title)}</h4><p>{escape(text)}</p></div>'
-        for date, title, text in items) + '</div>'
-
-
-def render(key):
-    c = COPY[key]
-    prefix = "../" if key == "zh" else ""
-    canonical = BASE + ("/zh/" if key == "zh" else "/")
-    cv_en = prefix + "assets/resume/yuhao_xie_resume_en.pdf"
-    cv_zh = prefix + "assets/resume/yuhao_xie_resume_zh.pdf"
-    primary_cv = cv_zh if key == "zh" else cv_en
-    nav = ''.join(link('#' + slug, label) for slug, label in zip(('research', 'projects', 'background', 'contact'), c['nav']))
-    topics = ''.join(f'<div class="research-topic"><span class="topic-number">0{i} / {escape(k)}</span><h3>{escape(title)}</h3><p>{escape(desc)}</p></div>' for i, (k, title, desc) in enumerate(c['topics'], 1))
-    teaching = ''.join(f'<div class="teaching-group"><h4>{escape(c[role])}</h4><ul>' + ''.join(f'<li>{escape(item)}</li>' for item in c[role + '_items']) + '</ul></div>' for role in ('instructor', 'assistant'))
-    en_current = ' aria-current="page"' if key == 'en' else ''
-    zh_current = ' aria-current="page"' if key == 'zh' else ''
-    return f'''<!doctype html>
-<html lang="{c['lang']}">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{escape(c['title'])}</title><meta name="description" content="{escape(c['description'], quote=True)}">
-  <meta name="theme-color" content="#14646b"><meta name="color-scheme" content="light">
-  <link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="en" href="{BASE}/"><link rel="alternate" hreflang="zh-CN" href="{BASE}/zh/"><link rel="alternate" hreflang="x-default" href="{BASE}/">
-  <meta property="og:type" content="website"><meta property="og:title" content="{escape(c['title'], quote=True)}"><meta property="og:description" content="{escape(c['description'], quote=True)}"><meta property="og:url" content="{canonical}">
-  <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{prefix}assets/styles.css">
-</head>
-<body>
-<a class="skip-link" href="#main">{c['skip']}</a>
-<header class="site-header"><div class="container header-inner">
-  <a class="brand" href="./" aria-label="{escape(c['brand'])}"><span class="brand-mark" aria-hidden="true">yx</span><span class="brand-name">{c['brand']}</span></a>
-  <nav class="site-nav" aria-label="{'主导航' if key == 'zh' else 'Main navigation'}">{nav}</nav>
-  <div class="header-actions"><div class="language-switch" aria-label="Language"><a href="{prefix or './'}" lang="en"{en_current}>EN</a><span aria-hidden="true">/</span><a href="{'./' if key == 'zh' else 'zh/'}" lang="zh-CN"{zh_current}>中文</a></div>{link(primary_cv, c['header_cv'], 'button button-small')}</div>
-</div></header>
-<main id="main"><div class="container">
-  <section class="hero" aria-labelledby="name"><div class="hero-copy">
-    <p class="eyebrow">{c['eyebrow']}</p><h1 id="name" class="name">{c['name']}<span class="native-name">{c['native']}</span></h1>
-    <p class="hero-role">{c['role']}</p><p class="hero-lead">{c['lead']}</p>
-    <div class="hero-actions">{link(primary_cv, c['cv_zh'] if key == 'zh' else c['cv_en'], 'button')}{link(cv_en if key == 'zh' else cv_zh, c['cv_en'] if key == 'zh' else c['cv_zh'], 'button button-outline')}</div>
-    <div class="hero-links">{link('mailto:' + EMAIL, 'Email ↗')}{link('https://github.com/wsxhjnb1', 'GitHub ↗')}{link(LINKEDIN, 'LinkedIn ↗')}</div>
-  </div><aside class="hero-figure" aria-label="Research focus"><div class="figure-topline"><span class="status-dot" aria-hidden="true"></span>{c['figure_label']}</div>{DIAGRAM}<p class="figure-caption">{c['figure_caption']}</p></aside></section>
-  <div class="research-strip">{topics}</div>
-  <section class="section" id="research"><div class="section-heading"><div><p class="eyebrow">{c['research_label']}</p><h2>{c['research_title']}</h2></div><p class="section-note">{c['research_note']}</p></div>
-    <article class="publication"><span class="publication-index" aria-hidden="true">01</span><div class="publication-body"><div class="publication-meta"><span>{c['venue']}</span><span>{c['first_author']}</span></div>
-    <h3 class="publication-title">{link(PAPER, 'Beyond: Better-than-Full-Precision KV Caches via Learnable Non-Uniform Quantization as Implicit Regularization')}</h3>
-    <p class="authors"><strong>Yuhao Xie</strong>, Mingjie Lin</p><p class="publication-summary">{c['pub_summary']}</p>
-    <div class="inline-links">{link(PAPER, c['paper'])}{link(BEYOND, c['code'])}{link('https://wsxhjnb1.github.io/Beyond-KV-Cache/', c['project'])}</div></div></article>
-  </section>
-  <section class="section" id="projects"><div class="section-heading"><div><p class="eyebrow">{c['projects_label']}</p><h2>{c['projects_title']}</h2></div><p class="section-note">{c['projects_note']}</p></div>
-    <div class="work-list"><article class="work-row"><span class="work-number">01</span><div class="work-content"><p class="work-tag">{c['orbit_tag']}</p><h3>{c['orbit_title']}</h3><p>{c['orbit_summary']}</p><div class="work-note"><strong>{c['orbit_result']}</strong><p>{c['orbit_scope']}</p></div><div class="inline-links">{link(ORBIT, c['code'])}{link(ORBIT + '/blob/main/evidence/vllm_agent/RESULTS.md', c['results'])}</div></div></article>
-    <article class="work-row"><span class="work-number">02</span><div class="work-content"><p class="work-tag">{c['kernel_tag']}</p><h3>{c['kernel_title']}</h3><p>{c['kernel_summary']}</p><div class="work-note"><strong>{c['kernel_result']}</strong><p>{c['kernel_scope']}</p></div><div class="inline-links">{link(primary_cv, c['details'])}</div></div></article></div>
-  </section>
-  <section class="section" id="background"><div class="section-heading"><div><p class="eyebrow">{c['background_label']}</p><h2>{c['background_title']}</h2></div></div>
-    <div class="background-grid"><div class="background-block"><h3>{c['education']}</h3>{timeline(c['education_items'])}</div><div class="background-block"><h3>{c['experience']}</h3>{timeline(c['experience_items'])}</div></div>
-    <div class="service-row"><div class="service-item"><p class="eyebrow">{c['service_label']}</p><strong>{c['service_title']}</strong><p>{c['service_text']}</p></div><div class="service-item"><p class="eyebrow">{c['honor_label']}</p><strong>{c['honor_title']}</strong><p>{c['honor_text']}</p></div></div>
-    <details class="teaching-details"><summary>{c['teaching']}</summary><div class="teaching-columns">{teaching}</div></details>
-  </section>
-  <section class="section" id="contact"><div class="contact-panel"><p class="eyebrow">{c['contact_label']}</p><h2>{c['contact_title']}</h2><p>{c['contact_text']}</p><div class="contact-links">{link('mailto:' + EMAIL, EMAIL + ' ↗', 'email-link')}<div class="inline-links">{link('https://github.com/wsxhjnb1', 'GitHub ↗')}{link(LINKEDIN, 'LinkedIn ↗')}{link('https://github.com/wsxhjnb1/resume', c['resume_repo'])}</div></div></div></section>
-</div></main>
-<footer class="site-footer"><div class="container footer-inner"><p>© 2026 Yuhao Xie · 谢雨豪</p>{link('https://github.com/wsxhjnb1/wsxhjnb1.github.io', c['source'])}</div></footer>
-</body></html>'''
+from academic_layout import render
 
 
 if __name__ == '__main__':
     for key, path in [('en', ROOT/'index.html'), ('zh', ROOT/'zh/index.html')]:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(render(key) + '\n', encoding='utf-8')
+        path.write_text(render(key, COPY[key]) + '\n', encoding='utf-8')
         print(path.relative_to(ROOT))
