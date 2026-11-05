@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>谢雨豪 | 大模型推理与 GPU 系统</title><meta name="description" content="谢雨豪，中佛罗里达大学计算机工程博士在读，研究大模型高效推理、KV Cache 量化、CUDA 内核与 Agent 评分系统。">
+  <meta name="theme-color" content="#14646b"><meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://wsxhjnb1.github.io/zh/"><link rel="alternate" hreflang="en" href="https://wsxhjnb1.github.io/"><link rel="alternate" hreflang="zh-CN" href="https://wsxhjnb1.github.io/zh/"><link rel="alternate" hreflang="x-default" href="https://wsxhjnb1.github.io/">
+  <meta property="og:type" content="website"><meta property="og:title" content="谢雨豪 | 大模型推理与 GPU 系统"><meta property="og:description" content="谢雨豪，中佛罗里达大学计算机工程博士在读，研究大模型高效推理、KV Cache 量化、CUDA 内核与 Agent 评分系统。"><meta property="og:url" content="https://wsxhjnb1.github.io/zh/">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">跳转到正文</a>
+<header class="site-header"><div class="container header-inner">
+  <a class="brand" href="./" aria-label="谢雨豪"><span class="brand-mark" aria-hidden="true">yx</span><span class="brand-name">谢雨豪</span></a>
+  <nav class="site-nav" aria-label="主导航"><a href="#research" class="">研究</a><a href="#projects" class="">项目</a><a href="#background" class="">经历</a><a href="#contact" class="">联系</a></nav>
+  <div class="header-actions"><div class="language-switch" aria-label="Language"><a href="../" lang="en">EN</a><span aria-hidden="true">/</span><a href="./" lang="zh-CN" aria-current="page">中文</a></div><a href="../assets/resume/yuhao_xie_resume_zh.pdf" class="button button-small">简历下载 ↗</a></div>
+</div></header>
+<main id="main"><div class="container">
+  <section class="hero" aria-labelledby="name"><div class="hero-copy">
+    <p class="eyebrow">大模型高效推理 · GPU 系统</p><h1 id="name" class="name">谢雨豪<span class="native-name">Yuhao Xie</span></h1>
+    <p class="hero-role">中佛罗里达大学 · 计算机工程博士在读</p><p class="hero-lead">我的研究关注如何让大语言模型更高效：从保存上下文的 KV Cache，到执行解码的 GPU 内核，再到 Agent 的工具调用评分。</p>
+    <div class="hero-actions"><a href="../assets/resume/yuhao_xie_resume_zh.pdf" class="button">中文简历</a><a href="../assets/resume/yuhao_xie_resume_en.pdf" class="button button-outline">English résumé</a></div>
+    <div class="hero-links"><a href="mailto:yuhaoxie1999@gmail.com" class="">Email ↗</a><a href="https://github.com/wsxhjnb1" class="">GitHub ↗</a><a href="https://www.linkedin.com/in/yuhao-xie/" class="">LinkedIn ↗</a></div>
+  </div><aside class="hero-figure" aria-label="Research focus"><div class="figure-topline"><span class="status-dot" aria-hidden="true"></span>从内存到计算，再到决策</div><svg class="focus-diagram" viewBox="0 0 620 470" role="img" aria-labelledby="diagram-title diagram-desc">
+<title id="diagram-title">Memory, compute and decisions</title>
+<desc id="diagram-desc">A conceptual research map linking compact KV memory, fused GPU decoding, and Agent tool-call scoring. This is not a benchmark chart.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#668a87" stroke-width="1.2"/></marker></defs>
+<g font-family="Segoe UI,Arial,sans-serif" fill="#264340">
+<rect x="24" y="24" width="572" height="112" rx="12" fill="#e9eeea"/>
+<text x="46" y="54" font-size="13" letter-spacing="2">01 / KV MEMORY</text>
+<text x="46" y="84" font-size="20" font-weight="600">Keep the context. Use fewer bytes.</text>
+<g fill="#14646b"><rect x="46" y="103" width="30" height="12" rx="3"/><rect x="82" y="103" width="30" height="12" rx="3"/><rect x="118" y="103" width="30" height="12" rx="3"/><rect x="154" y="103" width="30" height="12" rx="3"/></g>
+<g fill="#7eaaa3"><rect x="196" y="103" width="30" height="12" rx="3"/><rect x="232" y="103" width="30" height="12" rx="3"/><rect x="268" y="103" width="30" height="12" rx="3"/><rect x="304" y="103" width="30" height="12" rx="3"/></g>
+<text x="390" y="113" font-size="14" fill="#526d68">packed K / V</text>
+<path d="M310 144V167" stroke="#668a87" fill="none" marker-end="url(#arrow)"/>
+<rect x="24" y="178" width="572" height="112" rx="12" fill="#fffdf7" stroke="#d4ddd5"/>
+<text x="46" y="208" font-size="13" letter-spacing="2">02 / GPU DECODING</text>
+<rect x="46" y="227" width="142" height="40" rx="7" fill="#dbe8df"/><text x="117" y="252" text-anchor="middle" font-size="15">dequantize</text>
+<path d="M196 247H220" stroke="#668a87" fill="none" marker-end="url(#arrow)"/>
+<rect x="232" y="227" width="142" height="40" rx="7" fill="#14646b"/><text x="303" y="252" text-anchor="middle" font-size="15" fill="white">attention</text>
+<path d="M382 247H406" stroke="#668a87" fill="none" marker-end="url(#arrow)"/>
+<rect x="418" y="227" width="154" height="40" rx="7" fill="#dbe8df"/><text x="495" y="252" text-anchor="middle" font-size="15">accumulate</text>
+<path d="M310 298V321" stroke="#668a87" fill="none" marker-end="url(#arrow)"/>
+<rect x="24" y="332" width="572" height="112" rx="12" fill="#e9eeea"/>
+<text x="46" y="362" font-size="13" letter-spacing="2">03 / AGENT SCORING</text>
+<text x="46" y="398" font-size="20" font-weight="600">Score candidates. Choose a call.</text>
+<g transform="translate(428 354)"><rect width="144" height="20" rx="4" fill="#c5d7cd"/><rect y="27" width="144" height="20" rx="4" fill="#14646b"/><rect y="54" width="144" height="20" rx="4" fill="#c5d7cd"/><text x="72" y="41" text-anchor="middle" font-size="13" fill="white">selected</text></g>
+</g></svg><p class="figure-caption">内存、计算、决策：研究方向的概念示意。</p></aside></section>
+  <div class="research-strip"><div class="research-topic"><span class="topic-number">01 / 内存</span><h3>KV Cache 量化</h3><p>低比特表示、可学习量化与节省内存的解码方法。</p></div><div class="research-topic"><span class="topic-number">02 / 计算</span><h3>GPU 融合内核</h3><p>融合按需反量化与注意力计算，减少 GPU 显存读写。</p></div><div class="research-topic"><span class="topic-number">03 / 决策</span><h3>Agent 评分系统</h3><p>优化工具调用概率评分，并集成至 vLLM 推理流程。</p></div></div>
+  <section class="section" id="research"><div class="section-heading"><div><p class="eyebrow">01 / 研究</p><h2>代表论文</h2></div><p class="section-note">连接量化方法与推理系统。</p></div>
+    <article class="publication"><span class="publication-index" aria-hidden="true">01</span><div class="publication-body"><div class="publication-meta"><span>EMNLP 2026 · 主会</span><span>第一作者</span></div>
+    <h3 class="publication-title"><a href="https://wsxhjnb1.github.io/Beyond-KV-Cache/paper/Beyond.pdf" class="">Beyond: Better-than-Full-Precision KV Caches via Learnable Non-Uniform Quantization as Implicit Regularization</a></h3>
+    <p class="authors"><strong>Yuhao Xie</strong>, Mingjie Lin</p><p class="publication-summary">从隐式正则化的视角，研究可学习非均匀 KV Cache 量化。</p>
+    <div class="inline-links"><a href="https://wsxhjnb1.github.io/Beyond-KV-Cache/paper/Beyond.pdf" class="">论文全文 ↗</a><a href="https://github.com/wsxhjnb1/Beyond-KV-Cache" class="">开源代码 ↗</a><a href="https://wsxhjnb1.github.io/Beyond-KV-Cache/" class="">项目主页 ↗</a></div></div></article>
+  </section>
+  <section class="section" id="projects"><div class="section-heading"><div><p class="eyebrow">02 / 工程</p><h2>代表性系统项目</h2></div><p class="section-note">围绕具体场景实现优化，并注明实测条件。</p></div>
+    <div class="work-list"><article class="work-row"><span class="work-number">01</span><div class="work-content"><p class="work-tag">CUDA / vLLM</p><h3>OrbitCall</h3><p>面向 CUDA GPU 的 vLLM 0.29 工具调用评分插件，用于有限 JSON 键序候选族。保留原生 LM head 投影形状与完整 JSON/EOS 概率，减少归一化、排名计算和 CPU 传输开销。</p><div class="work-note"><strong>完整双轮 Agent 实测加速 1.08 倍</strong><p>Qwen2.5-3B · DGX Spark（GB10）· 六组配对测速 · 八个固定流程 · 相较原生全量评分。</p></div><div class="inline-links"><a href="https://github.com/wsxhjnb1/OrbitCall" class="">开源代码 ↗</a><a href="https://github.com/wsxhjnb1/OrbitCall/blob/main/evidence/vllm_agent/RESULTS.md" class="">实验报告 ↗</a></div></div></article>
+    <article class="work-row"><span class="work-number">02</span><div class="work-content"><p class="work-tag">GPU 内核</p><h3>量化 KV Cache 的融合注意力解码</h3><p>将 KV 按需反量化、注意力得分计算、在线 Softmax 与 Value 加权累加融合到解码内核，在寄存器中重构压缩 K/V，避免在显存中生成完整的高精度 KV 副本。</p><div class="work-note"><strong>在实测配置下推理加速 40%</strong><p>Llama 2 7B · 单张 NVIDIA H100 · 相较 Hugging Face 实现。</p></div><div class="inline-links"><a href="../assets/resume/yuhao_xie_resume_zh.pdf" class="">在简历中查看详情 ↗</a></div></div></article></div>
+  </section>
+  <section class="section" id="background"><div class="section-heading"><div><p class="eyebrow">03 / 经历</p><h2>研究与工程实践</h2></div></div>
+    <div class="background-grid"><div class="background-block"><h3>教育背景</h3><div class="timeline"><div class="timeline-item"><span class="timeline-date">2023 — 2027（预计）</span><h4>中佛罗里达大学</h4><p>计算机工程博士在读</p></div><div class="timeline-item"><span class="timeline-date">2021 — 2023</span><h4>佛罗里达大学</h4><p>电气与计算机工程硕士</p></div><div class="timeline-item"><span class="timeline-date">2017 — 2021</span><h4>杭州电子科技大学</h4><p>电气与计算机工程学士</p></div></div></div><div class="background-block"><h3>产业经历</h3><div class="timeline"><div class="timeline-item"><span class="timeline-date">2024.05 — 2024.08</span><h4>同花顺</h4><p>大语言模型研究实习生。开发 CUDA 量化内核，并集成 FlashAttention 与分页 KV Cache。</p></div><div class="timeline-item"><span class="timeline-date">2021.01 — 2021.05</span><h4>Rtelligent Technology</h4><p>软件工程实习生。参与 ARM 固件、G-code 处理与 FPGA 光栅图像并行处理。</p></div></div></div></div>
+    <div class="service-row"><div class="service-item"><p class="eyebrow">学术服务</p><strong>ICLR 2027 审稿人</strong><p>International Conference on Learning Representations。</p></div><div class="service-item"><p class="eyebrow">奖学金</p><strong>ORCGS 博士奖学金</strong><p>中佛罗里达大学 · 2023–2027</p></div></div>
+    <details class="teaching-details"><summary>中佛罗里达大学教学经历</summary><div class="teaching-columns"><div class="teaching-group"><h4>讲师</h4><ul><li>2026.08–2026.12 · 数字系统（EEE3342C）、计算机组成（EEL3801C）</li><li>2024.08–2025.05 · 计算机组成实验课程</li></ul></div><div class="teaching-group"><h4>助教</h4><ul><li>2026.08–2026.12 · 硬件安全与可信电路设计（EEE4346C）</li><li>2025.05–2025.08 · Junior Design</li></ul></div></div></details>
+  </section>
+  <section class="section" id="contact"><div class="contact-panel"><p class="eyebrow">04 / 联系</p><h2>交流大模型高效推理。</h2><p>欢迎交流大模型推理与 GPU 系统研究，以及相关合作和工作机会。请通过邮件联系我。</p><div class="contact-links"><a href="mailto:yuhaoxie1999@gmail.com" class="email-link">yuhaoxie1999@gmail.com ↗</a><div class="inline-links"><a href="https://github.com/wsxhjnb1" class="">GitHub ↗</a><a href="https://www.linkedin.com/in/yuhao-xie/" class="">LinkedIn ↗</a><a href="https://github.com/wsxhjnb1/resume" class="">简历仓库 ↗</a></div></div></div></section>
+</div></main>
+<footer class="site-footer"><div class="container footer-inner"><p>© 2026 Yuhao Xie · 谢雨豪</p><a href="https://github.com/wsxhjnb1/wsxhjnb1.github.io" class="">网站源码 ↗</a></div></footer>
+</body></html>
