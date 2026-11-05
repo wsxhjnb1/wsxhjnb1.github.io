@@ -83,12 +83,13 @@ def render(key, c):
   <meta name="theme-color" content="#1d4ed8"><meta name="color-scheme" content="light">
   <link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="en" href="{BASE}/"><link rel="alternate" hreflang="zh-CN" href="{BASE}/zh/"><link rel="alternate" hreflang="x-default" href="{BASE}/">
   <meta property="og:type" content="website"><meta property="og:title" content="{escape(c['title'], quote=True)}"><meta property="og:description" content="{escape(c['description'], quote=True)}"><meta property="og:url" content="{canonical}">
-  <link rel="icon" href="{prefix}assets/favicon.svg?v=academic-20261105" type="image/svg+xml"><link rel="stylesheet" href="{prefix}assets/styles.css?v=academic-20261105">
+  <link rel="icon" href="{prefix}assets/favicon.svg?v=academic-20261105" type="image/svg+xml"><link rel="stylesheet" href="{prefix}assets/styles.css?v=portrait-20261105">
 </head>
 <body>
 <a class="skip-link" href="#main">{c['skip']}</a>
 <div class="page-shell">
   <aside class="profile-sidebar" aria-label="{'个人信息' if key == 'zh' else 'Profile'}">
+    <img class="profile-photo" src="{prefix}assets/yuhao-xie.jpg" alt="{'谢雨豪的照片' if key == 'zh' else 'Portrait of Yuhao Xie'}" width="3652" height="5489" fetchpriority="high" decoding="async">
     <h1 class="profile-name">{c['name']}</h1><p class="profile-native">{c['native']}</p>
     <p class="profile-role">{u['role']}</p><p class="profile-affiliation">{u['department']}<br>{u['university']}</p>
     <p class="profile-focus">{u['focus']}</p>

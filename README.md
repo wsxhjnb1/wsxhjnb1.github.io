@@ -25,6 +25,9 @@ Edit `assets/styles.css` for layout changes. The compact academic layout lives
 in `tools/academic_layout.py`. The paper thumbnail is a render of the first page
 of the linked Beyond PDF.
 
+The profile portrait in `assets/yuhao-xie.jpg` was supplied by Yuhao Xie. The
+original photograph is preserved; CSS controls the square profile framing.
+
 ## Design references
 
 The white, cobalt-blue academic profile is independently implemented, with

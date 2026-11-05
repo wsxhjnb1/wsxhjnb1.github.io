@@ -116,5 +116,5 @@ from academic_layout import render
 if __name__ == '__main__':
     for key, path in [('en', ROOT/'index.html'), ('zh', ROOT/'zh/index.html')]:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(render(key, COPY[key]) + '\n', encoding='utf-8')
+        path.write_text(render(key, COPY[key]) + '\n', encoding='utf-8', newline='\n')
         print(path.relative_to(ROOT))
