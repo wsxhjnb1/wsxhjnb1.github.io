@@ -4,7 +4,7 @@ from html import escape
 BASE = "https://wsxhjnb1.github.io"
 PAPER = BASE + "/Beyond-KV-Cache/paper/Beyond.pdf"
 BEYOND = "https://github.com/wsxhjnb1/Beyond-KV-Cache"
-ORBIT = "https://github.com/wsxhjnb1/OrbitCall"
+FA2 = "https://github.com/wsxhjnb1/FA2-Residency"
 EMAIL = "yuhaoxie1999@gmail.com"
 LINKEDIN = "https://www.linkedin.com/in/yuhao-xie/"
 
@@ -15,11 +15,11 @@ UI = {
         "about": "About me", "publications": "Publications", "projects": "Projects",
         "background": "Education & experience", "service": "Service & honors", "contact": "Contact",
         "intro": "I am a Ph.D. student in Computer Engineering at the University of Central Florida. My research focuses on efficient large language model inference, especially KV-cache quantization and GPU kernel optimization.",
-        "intro_second": "I work across methods and systems: learning compact KV representations, developing fused attention kernels, and integrating scoring optimizations into vLLM. Previously, I worked on LLM inference at Hithink RoyalFlush.",
+        "intro_second": "I study compact KV representations, build fused attention kernels, and optimize FlashAttention scheduling with constraint solving and hardware measurements. Previously, I worked on LLM inference at Hithink RoyalFlush.",
         "interests_label": "Research interests",
         "interests": ["KV-cache quantization", "CUDA & fused attention", "LLM inference systems"],
         "cv_en": "CV · English", "cv_zh": "简历 · 中文",
-        "paper": "Paper", "code": "Code", "project": "Project page", "results": "Results",
+        "paper": "Paper", "code": "Code", "project": "Project page",
         "full_cv": "More in CV", "preview_alt": "First page of the Beyond paper",
         "venue": "EMNLP 2026, main conference", "service_reviewer": "Reviewer, ICLR 2027",
         "service_fellowship": "ORCGS Doctoral Fellowship, UCF (2023–2027)",
@@ -32,11 +32,11 @@ UI = {
         "about": "关于我", "publications": "学术论文", "projects": "系统项目",
         "background": "教育与工作经历", "service": "学术服务与荣誉", "contact": "联系",
         "intro": "我是中佛罗里达大学计算机工程博士研究生，研究方向为大模型高效推理，重点关注 KV Cache 量化与 GPU 内核优化。",
-        "intro_second": "我的工作覆盖方法与系统：学习紧凑的 KV 表示、开发融合注意力内核，并将评分优化集成到 vLLM。此前曾在同花顺参与大模型推理研究与工程开发。",
+        "intro_second": "我研究紧凑的 KV 表示，开发融合注意力内核，并结合约束求解与硬件实测优化 FlashAttention 调度。此前曾在同花顺参与大模型推理研究与工程开发。",
         "interests_label": "研究兴趣",
         "interests": ["KV Cache 量化", "CUDA 与融合注意力", "大模型推理系统"],
         "cv_en": "CV · English", "cv_zh": "简历 · 中文",
-        "paper": "论文", "code": "代码", "project": "项目主页", "results": "实验报告",
+        "paper": "论文", "code": "代码", "project": "项目主页",
         "full_cv": "简历详情", "preview_alt": "Beyond 论文首页",
         "venue": "EMNLP 2026，主会", "service_reviewer": "ICLR 2027 审稿人",
         "service_fellowship": "ORCGS 博士奖学金，中佛罗里达大学（2023–2027）",
@@ -115,9 +115,9 @@ def render(key, c):
       </article>
     </section>
     <section class="cv-section" id="projects"><h2>{u['projects']}</h2>
-      <article class="project-entry"><div class="project-heading"><h3>{link(ORBIT,c['orbit_title'])}</h3><span class="project-category">{c['orbit_tag']}</span></div>
-        <p class="project-desc">{c['orbit_summary']}</p><p class="project-result"><strong>{c['orbit_result']}{result_stop}</strong> {c['orbit_scope']}</p>
-        <div class="resource-links">{link(ORBIT,u['code'])}{link(ORBIT+'/blob/main/evidence/vllm_agent/RESULTS.md',u['results'])}</div>
+      <article class="project-entry"><div class="project-heading"><h3>{c['fa2_title']}</h3><span class="project-category">{c['fa2_tag']}</span></div>
+        <p class="project-desc">{c['fa2_summary']}</p><p class="project-result"><strong>{c['fa2_result']}{result_stop}</strong> {c['fa2_scope']}</p>
+        <div class="resource-links">{link(FA2,u['code'])}</div>
       </article>
       <article class="project-entry"><div class="project-heading"><h3>{c['kernel_title']}</h3><span class="project-category">{c['kernel_tag']}</span></div>
         <p class="project-desc">{c['kernel_summary']}</p><p class="project-result"><strong>{c['kernel_result']}{result_stop}</strong> {c['kernel_scope']}</p>
