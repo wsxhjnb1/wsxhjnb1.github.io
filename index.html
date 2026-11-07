@@ -38,9 +38,9 @@
       </article>
     </section>
     <section class="cv-section" id="projects"><h2>Projects</h2>
-      <article class="project-entry"><div class="project-heading"><h3>FA2 Residency Scheduler</h3><span class="project-category">CUDA / CuTe</span></div>
+      <article class="project-entry"><div class="project-heading"><h3>TileCadence</h3><span class="project-category">CUDA / CuTe</span></div>
         <p class="project-desc">A constraint solver generates FlashAttention-2 kernel schedules for on-chip tile residency, recomputation and pipelining. Hardware measurements guide kernel selection.</p><p class="project-result"><strong>1.04× attention and 1.02× full-forward speedup.</strong> Qwen3-4B prefill, batch 4, 32K tokens, on DGX Spark (GB10) against default FlashAttention-2.</p>
-        <div class="resource-links"><a href="https://github.com/wsxhjnb1/FA2-Residency" class="">Code</a></div>
+        <div class="resource-links"><a href="https://github.com/wsxhjnb1/TileCadence" class="">Code</a></div>
       </article>
       <article class="project-entry"><div class="project-heading"><h3>Attention decoding with quantized KV caches</h3><span class="project-category">GPU KERNELS</span></div>
         <p class="project-desc">Fused on-the-fly KV dequantization, attention scoring, online softmax and value accumulation. Packed K/V are reconstructed in registers, avoiding full-precision KV materialization in GPU memory.</p><p class="project-result"><strong>40% faster inference in the measured setup.</strong> Llama 2 7B · one NVIDIA H100 · versus a Hugging Face implementation.</p>
