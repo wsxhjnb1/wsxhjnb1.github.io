@@ -39,7 +39,7 @@
     </section>
     <section class="cv-section" id="projects"><h2>Projects</h2>
       <article class="project-entry"><div class="project-heading"><h3>TileCadence</h3><span class="project-category">CUDA / CuTe</span></div>
-        <p class="project-desc">A constraint solver generates FlashAttention-2 kernel schedules for on-chip tile residency, recomputation and pipelining. Hardware measurements guide kernel selection.</p><p class="project-result"><strong>1.04× attention and 1.02× full-forward speedup.</strong> Qwen3-4B prefill, batch 4, 32K tokens, on DGX Spark (GB10) against default FlashAttention-2.</p>
+        <p class="project-desc">A constraint solver decides when to release shared-memory buffers so FlashAttention-2 can fit more intermediates on chip or keep them there longer. It schedules probability tiles, output tiles and log-sum-exp values. Device limits and measured latency guide kernel selection. CUDA kernels were validated on an RTX 3080 Laptop GPU and DGX Spark (GB10).</p><p class="project-result"><strong>1.11–1.13× prefill attention speedup.</strong> Qwen3-4B across 13 shapes at 8K–32K tokens on DGX Spark (GB10), versus default FlashAttention-2.</p>
         <div class="resource-links"><a href="https://github.com/wsxhjnb1/TileCadence" class="">Code</a></div>
       </article>
       <article class="project-entry"><div class="project-heading"><h3>Attention decoding with quantized KV caches</h3><span class="project-category">GPU KERNELS</span></div>

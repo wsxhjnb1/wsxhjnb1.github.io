@@ -39,7 +39,7 @@
     </section>
     <section class="cv-section" id="projects"><h2>系统项目</h2>
       <article class="project-entry"><div class="project-heading"><h3>TileCadence</h3><span class="project-category">CUDA / CuTe</span></div>
-        <p class="project-desc">用约束求解为 FlashAttention-2 生成片上数据驻留、重算和流水线调度方案，再根据硬件实测选型。</p><p class="project-result"><strong>注意力加速 1.04 倍，完整前向加速 1.02 倍。</strong> 在 DGX Spark（GB10）上测量 Qwen3-4B 的预填充，批量为 4、上下文为 32K token，基线为原生默认 FlashAttention-2。</p>
+        <p class="project-desc">为 FlashAttention-2 求解何时释放共享内存，以及如何复用腾出的空间，让概率块、输出块和 softmax 的对数归一化项能在片上存得更多或更久。内核选型参考设备资源限制与实测延迟。CUDA 内核已在 RTX 3080 Laptop GPU 和 DGX Spark（GB10）上验证。</p><p class="project-result"><strong>预填充注意力加速 1.11–1.13 倍。</strong> 在 DGX Spark（GB10）上测试 Qwen3-4B 的 13 个 8K–32K 形状，基线为原生默认 FlashAttention-2。</p>
         <div class="resource-links"><a href="https://github.com/wsxhjnb1/TileCadence" class="">代码</a></div>
       </article>
       <article class="project-entry"><div class="project-heading"><h3>量化 KV Cache 的融合注意力解码</h3><span class="project-category">GPU 内核</span></div>
